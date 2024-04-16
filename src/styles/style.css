@@ -1,3 +1,143 @@
-h1{
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+  font-weight: normal;
+  font: inherit;
   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  color: #f8f8f2;
+}
+
+html,
+body {
+  background-color: #282a36;
+  height: 100%;
+}
+
+span{
+  color: inherit;
+}
+
+#total {
+  margin: auto;
+  height: 100%;
+  max-width: 1600px;
+  background-color: #282a36;
+  padding: 1.2rem;
+
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 1rem;
+}
+
+.title {
+  background-color: #44475a;
+  border-radius: 0.5rem;
+  font-size: 1.3rem;
+  padding: 0.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#total > h1 {
+  padding: 0.8rem;
+  font-size: 2rem;
+  grid-column: 1/3;
+}
+
+#total > #form {
+  grid-column: 1/2;
+}
+
+#total > #form > form {
+  display: flex;
+  flex-direction: column;
+}
+
+#total > #form > form label,
+#total > #form > form button {
+  margin-top: 1rem;
+}
+
+#total > #form > form input,
+#total > #form > form select {
+  margin-top: 0.2rem;
+  background-color: #44475a;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  font-size: 1.3rem;
+  padding: 0.6rem;
+  font-weight: bold;
+}
+
+#total > #form > form button {
+  background-color: #50fa7ac7;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  font-size: 1.3rem;
+  padding: 0.6rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#total > #transactions {
+  grid-column: 2/3;
+}
+
+#total > #transactions > #finance-history{
+  margin-top: 1rem;
+}
+
+ul#table{
+  height: 492px;
+  overflow-y: auto;
+}
+
+ul#table li{
+  border-bottom: 1px solid #44475a;
+  padding: 1rem;
+
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 60% 20% 1fr 1fr;
+  align-items: center;
+  gap: .5rem;
+}
+
+li > button{
+  border-radius: 0.5rem;
+  padding: .6rem;
+  border: none;
+  cursor: pointer;
+  transition: .1s;
+  font-weight: bold;
+}
+
+li > button:active{
+  box-shadow: 5px 5px 10px hsla(0, 0%, 0%, 0.2);
+}
+
+.edit{
+  background-color: #ecfa50;
+}
+
+.delete {
+  background-color: #fa5050;
+}
+
+.entry{
+  color: #50fa7a;
+}
+
+.out {
+  color: #fa5050;
+}
+
+.out span::before{
+  content: "-";
 }
