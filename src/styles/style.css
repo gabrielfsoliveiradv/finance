@@ -25,7 +25,7 @@ span{
   height: 100%;
   max-width: 1600px;
   background-color: #282a36;
-  padding: 1.2rem;
+  padding: 1.5rem;
 
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -89,13 +89,12 @@ span{
   grid-column: 2/3;
 }
 
-#total > #transactions > #finance-history{
-  margin-top: 1rem;
+#total > #transactions #currentAmount{
+  font-size: inherit;
 }
 
-ul#table{
-  height: 492px;
-  overflow-y: auto;
+#total > #transactions > #finance-history{
+  margin-top: 1rem;
 }
 
 ul#table li{
@@ -104,7 +103,7 @@ ul#table li{
 
   margin-top: 1rem;
   display: grid;
-  grid-template-columns: 60% 20% 1fr 1fr;
+  grid-template-columns: 2fr 1fr 5rem 5rem;
   align-items: center;
   gap: .5rem;
 }
@@ -140,4 +139,23 @@ li > button:active{
 
 .out span::before{
   content: "-";
+}
+
+@media (max-width: 850px) {
+  *{
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 710px){
+  #total {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  #form{
+    align-self: center;
+    width: 300px;
+  }
 }
