@@ -1,3 +1,16 @@
 {
-  "transactions": []
+  "transactions": [
+    {
+      "name": "Salario de Abril",
+      "amount": 2200,
+      "type": "entry",
+      "id": "f3eb"
+    },
+    {
+      "name": "10 - Coxinhas",
+      "amount": 120,
+      "type": "entry",
+      "id": "d94e"
+    }
+  ]
 }

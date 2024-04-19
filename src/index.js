@@ -1,7 +1,9 @@
 import "./styles/style.css"
 import { createDomElement } from "./utils/createDomElement"
 
-async function getTransactions() {
+let transactionIdToEdit
+
+async function getEveryTransactions() {
   const transactions = await fetch("http://localhost:3000/transactions").then(
     (res) => res.json()
   )
@@ -20,12 +22,16 @@ async function getTransactions() {
   document.querySelector('#currentAmount').innerText = totalAmount.toFixed(2).toString().replace('.',',')
 }
 
+async function getTransaction(transactionID) {
+  return await fetch(`http://localhost:3000/transactions/${transactionID}`).then(res => res.json())
+}
+
 async function deleteTransaction(ev) {
   const id = ev.currentTarget.dataset.id
 
   await fetch(`http://localhost:3000/transactions/${id}`, { method: "DELETE" })
 
-  await getTransactions()
+  await getEveryTransactions()
 }
 
 async function postTransaction(transaction){
@@ -37,7 +43,28 @@ async function postTransaction(transaction){
     body: JSON.stringify(transaction)
   })
 
-  getTransactions()
+  getEveryTransactions()
+}
+
+async function putTransaction(transaction, id){
+  await fetch(`http://localhost:3000/transactions/${id}`, {
+    body: JSON.stringify(transaction),
+    method: 'PUT',
+    headers: {
+        "Content-Type": "application/json",
+    }
+  })
+
+  getEveryTransactions()
+}
+
+async function editTransaction(ev){
+  transactionIdToEdit = ev.currentTarget.dataset.id
+
+  const transaction = await getTransaction(transactionIdToEdit)
+  document.querySelector('#name').value = transaction.name
+  document.querySelector('#amount').value = transaction.amount
+  document.querySelector('#type').value = transaction.type
 }
 
 function renderTransaction(transaction) {
@@ -65,6 +92,7 @@ function renderTransaction(transaction) {
   const btnEdit = createDomElement("button", "edit")
   btnEdit.innerText = "Editar"
   btnEdit.dataset.id = transaction.id
+  btnEdit.addEventListener("click", editTransaction)
 
   const btnDelete = createDomElement("button", "delete")
   btnDelete.innerText = "Excluir"
@@ -77,7 +105,9 @@ function renderTransaction(transaction) {
   document.querySelector("#table").append(li)
 }
 
-document.addEventListener("DOMContentLoaded", getTransactions)
+
+
+document.addEventListener("DOMContentLoaded", getEveryTransactions)
 const form = document.querySelector('form')
 form.addEventListener('submit', async (ev) => {
   ev.preventDefault()
@@ -88,6 +118,12 @@ form.addEventListener('submit', async (ev) => {
     type: document.querySelector('#type').value
   }
 
+  if(!transactionIdToEdit){
+    await postTransaction(transaction)
+  } else {
+    await putTransaction(transaction, transactionIdToEdit)
+  }
+
+  transactionIdToEdit = ''
   form.reset()
-  await postTransaction(transaction)
 })
