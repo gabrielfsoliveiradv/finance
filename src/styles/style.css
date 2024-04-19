@@ -20,6 +20,10 @@ span{
   color: inherit;
 }
 
+button{
+  cursor: pointer;
+}
+
 #total {
   margin: auto;
   height: 100%;
@@ -112,7 +116,6 @@ li > button{
   border-radius: 0.5rem;
   padding: .6rem;
   border: none;
-  cursor: pointer;
   transition: .1s;
   font-weight: bold;
 }

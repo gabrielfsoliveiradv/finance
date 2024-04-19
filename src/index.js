@@ -5,8 +5,8 @@ async function getTransactions() {
   const transactions = await fetch("http://localhost:3000/transactions").then(
     (res) => res.json()
   )
-  console.log(transactions)
 
+  document.querySelector('#table').innerText = ''
 
   const totalAmount = transactions.reduce((acummulator, transaction) => {
     renderTransaction(transaction)
@@ -17,7 +17,6 @@ async function getTransactions() {
       return acummulator - transaction.amount
     }
   }, 0)
-
   document.querySelector('#currentAmount').innerText = totalAmount.toFixed(2).toString().replace('.',',')
 }
 
@@ -27,6 +26,18 @@ async function deleteTransaction(ev) {
   await fetch(`http://localhost:3000/transactions/${id}`, { method: "DELETE" })
 
   await getTransactions()
+}
+
+async function postTransaction(transaction){
+  await fetch("http://localhost:3000/transactions", {
+    method: 'POST',
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(transaction)
+  })
+
+  getTransactions()
 }
 
 function renderTransaction(transaction) {
@@ -67,3 +78,16 @@ function renderTransaction(transaction) {
 }
 
 document.addEventListener("DOMContentLoaded", getTransactions)
+const form = document.querySelector('form')
+form.addEventListener('submit', async (ev) => {
+  ev.preventDefault()
+
+  const transaction = {
+    name: document.querySelector('#name').value ,
+    amount: Number(document.querySelector('#amount').value),
+    type: document.querySelector('#type').value
+  }
+
+  form.reset()
+  await postTransaction(transaction)
+})

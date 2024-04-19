@@ -1,28 +1,3 @@
 {
-  "transactions": [
-    {
-      "name": "Payment",
-      "amount": 2000.30,
-      "type": "entry",
-      "id": "1"
-  },
-  {
-      "name": "Payment",
-      "amount": 763.00,
-      "type": "out",
-      "id": "2"
-  },
-  {
-      "name": "Payment",
-      "amount": 32.00,
-      "type": "out",
-      "id": "3"
-  },
-  {
-      "name": "Payment",
-      "amount": 563.00,
-      "type": "entry",
-      "id": "4"
-  }
-  ]
+  "transactions": []
 }
